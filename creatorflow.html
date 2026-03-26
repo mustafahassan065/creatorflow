@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creatorflow Premium | Scale Your E-Com & TikTok Shop Empire</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* =========================================
+   CORE SETUP & CSS VARIABLES
+   ========================================= */
+:root {
+    --bg-dark: #09090b;
+    --bg-panel: #18181b;
+    --neon-pink: #fe2c55; /* TikTok Pink */
+    --neon-pink-dim: rgba(254, 44, 85, 0.15);
+    --neon-cyan: #25f4ee; /* TikTok Cyan */
+    --neon-cyan-dim: rgba(37, 244, 238, 0.15);
+    --text-main: #a1a1aa;
+    --text-heading: #ffffff;
+    --glass-border: rgba(255, 255, 255, 0.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; cursor: none; }
+body { 
+    background-color: var(--bg-dark); 
+    color: var(--text-main); 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    overflow-x: hidden;
+}
+
+/* =========================================
+   TYPOGRAPHY UTILITIES
+   ========================================= */
+.font-display { font-family: 'Outfit', sans-serif; }
+.font-mono { font-family: 'JetBrains Mono', monospace; }
+
+.text-gradient-viral {
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: shine 4s linear infinite;
+}
+
+/* =========================================
+   BACKGROUNDS & TEXTURES
+   ========================================= */
+.grid-overlay {
+    background-size: 60px 60px;
+    background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+}
+
+.ambient-glow-pink {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--neon-pink-dim) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
+}
+.ambient-glow-cyan {
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--neon-cyan-dim) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* =========================================
+   CUSTOM SCROLLBAR
+   ========================================= */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); }
+
+/* =========================================
+   CUSTOM CURSOR (Creator Ring)
+   ========================================= */
+.cursor-dot, .cursor-ring {
+    position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
+    border-radius: 50%; z-index: 9999; pointer-events: none;
+}
+.cursor-dot {
+    width: 8px; height: 8px; background-color: var(--neon-cyan);
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+.cursor-ring {
+    width: 40px; height: 40px;
+    border: 2px solid var(--neon-pink);
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+}
+.cursor-hover .cursor-ring {
+    width: 60px; height: 60px;
+    background-color: rgba(37, 244, 238, 0.1);
+    border-color: var(--neon-cyan);
+}
+
+/* =========================================
+   KEYFRAME ANIMATIONS
+   ========================================= */
+@keyframes shine { to { background-position: 200% center; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+@keyframes slide-ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes pulse-ring { 
+    0% { transform: scale(0.8); opacity: 0.5; } 
+    100% { transform: scale(1.5); opacity: 0; } 
+}
+
+/* =========================================
+   UTILITY & COMPONENT CLASSES
+   ========================================= */
+.ticker-wrap { animation: slide-ticker 30s linear infinite; }
+.ticker-wrap:hover { animation-play-state: paused; }
+.floating { animation: float 6s ease-in-out infinite; }
+
+.glass-panel {
+    background: rgba(24, 24, 27, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+}
+.card-hover { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.card-hover:hover {
+    transform: translateY(-8px);
+    border-color: rgba(37, 244, 238, 0.4);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 0 20px rgba(37, 244, 238, 0.05);
+}
+
+/* Viral Button Style */
+.btn-viral {
+    background: var(--text-heading);
+    color: var(--bg-dark);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+.btn-viral::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+    z-index: -1; transition: all 0.4s ease;
+}
+.btn-viral:hover::before { left: 0; }
+.btn-viral:hover { color: white; box-shadow: 0 0 30px var(--neon-pink-dim); transform: scale(1.02); }
+
+/* SCROLL REVEAL FRAMEWORK */
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+</style>
+</head>
+<body class="relative hover-target-wrapper">
+
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<div class="fixed inset-0 grid-overlay z-[-2]"></div>
+<div class="fixed inset-0 bg-gradient-to-b from-transparent via-[#09090b]/80 to-[#09090b] z-[-1]"></div>
+
+<div class="w-full bg-[#18181b] border-b border-[rgba(255,255,255,0.05)] py-2.5 overflow-hidden relative z-50">
+    <div class="flex whitespace-nowrap ticker-wrap items-center">
+        <div class="flex items-center gap-10 px-5 font-mono text-[10px] uppercase tracking-widest text-gray-400">
+            <span class="text-white"><i class="fa-solid fa-fire text-[var(--neon-pink)] mr-2"></i> CREATORFLOW</span>
+            <span class="text-gray-700">///</span>
+            <span class="text-[var(--neon-cyan)]">TIKTOK SHOP DOMINATION</span>
+            <span class="text-gray-700">///</span>
+            <span>UGC SECRETS EXPOSED</span>
+            <span class="text-gray-700">///</span>
+            <span class="text-[var(--neon-pink)]">€500+ DAILY REVENUE</span>
+            <span class="text-gray-700">///</span>
+            <span>E-COM SCALING BLUEPRINTS</span>
+            <span class="text-gray-700">///</span>
+            <span class="text-[var(--neon-cyan)]">ACTIVE GERMAN & GLOBAL COMMUNITY</span>
+            <span class="text-gray-700">///</span>
+        </div>
+        <div class="flex items-center gap-10 px-5 font-mono text-[10px] uppercase tracking-widest text-gray-400">
+            <span class="text-white"><i class="fa-solid fa-fire text-[var(--neon-pink)] mr-2"></i> CREATORFLOW</span>
+            <span class="text-gray-700">///</span>
+            <span class="text-[var(--neon-cyan)]">TIKTOK SHOP DOMINATION</span>
+            <span class="text-gray-700">///</span>
+            <span>UGC SECRETS EXPOSED</span>
+            <span class="text-gray-700">///</span>
+            <span class="text-[var(--neon-pink)]">€500+ DAILY REVENUE</span>
+            <span class="text-gray-700">///</span>
+            <span>E-COM SCALING BLUEPRINTS</span>
+            <span class="text-gray-700">///</span>
+            <span class="text-[var(--neon-cyan)]">ACTIVE GERMAN & GLOBAL COMMUNITY</span>
+            <span class="text-gray-700">///</span>
+        </div>
+    </div>
+</div>
+
+<nav id="navbar" class="fixed w-full z-40 transition-all duration-500 py-5 top-[40px] border-b border-transparent">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex justify-between items-center glass-panel px-6 py-3 rounded-2xl">
+            
+            <a href="#" class="flex items-center gap-3 group no-underline hover-target">
+                <div class="w-10 h-10 rounded-xl bg-[#09090b] border border-[rgba(255,255,255,0.1)] flex items-center justify-center shadow-[0_0_15px_rgba(37,244,238,0.2)] group-hover:border-[var(--neon-cyan)] transition-all">
+                    <i class="fa-solid fa-bolt text-white text-lg group-hover:text-[var(--neon-cyan)] transition-colors"></i>
+                </div>
+                <span class="font-display font-bold text-white text-xl tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--neon-cyan)] group-hover:to-[var(--neon-pink)] transition-all">CREATORFLOW</span>
+            </a>
+
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="#about" class="text-sm font-medium text-gray-400 hover:text-white transition-colors hover-target">The Method</a>
+                <a href="#features" class="text-sm font-medium text-gray-400 hover:text-white transition-colors hover-target">The Arsenal</a>
+                <a href="#reviews" class="text-sm font-medium text-gray-400 hover:text-white transition-colors hover-target">Success Stories</a>
+                <a href="#pricing" class="text-sm font-medium text-gray-400 hover:text-white transition-colors hover-target">Access</a>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-5">
+                <a href="https://whop.com/creatorflow-premium?a=digitalartlab" target="_blank" class="text-sm font-bold text-gray-400 hover:text-white transition-all hover-target">Member Login</a>
+                <a href="#pricing" class="btn-viral px-6 py-2.5 rounded-xl font-bold text-sm tracking-wide hover-target">
+                    JOIN PREMIUM <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <button id="menu-btn" class="lg:hidden text-white focus:outline-none text-2xl hover-target">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu" class="lg:hidden absolute top-full left-6 right-6 mt-2 glass-panel rounded-2xl hidden flex-col overflow-hidden">
+        <a href="#about" class="px-6 py-4 border-b border-[rgba(255,255,255,0.05)] text-gray-300 hover:text-white hover:bg-[rgba(255,255,255,0.05)]">The Method</a>
+        <a href="#features" class="px-6 py-4 border-b border-[rgba(255,255,255,0.05)] text-gray-300 hover:text-white hover:bg-[rgba(255,255,255,0.05)]">The Arsenal</a>
+        <a href="#reviews" class="px-6 py-4 border-b border-[rgba(255,255,255,0.05)] text-gray-300 hover:text-white hover:bg-[rgba(255,255,255,0.05)]">Success Stories</a>
+        <a href="https://whop.com/creatorflow-premium?a=digitalartlab" class="px-6 py-4 border-b border-[rgba(255,255,255,0.05)] text-[var(--neon-cyan)] font-bold">Member Login</a>
+        <a href="#pricing" class="px-6 py-4 text-center bg-white text-black font-bold">JOIN PREMIUM</a>
+    </div>
+</nav>
+
+<section class="relative min-h-[100vh] flex items-center justify-center pt-32 pb-20 overflow-hidden">
+    
+    <div class="ambient-glow-pink top-1/4 left-[-10%] floating"></div>
+    <div class="ambient-glow-cyan bottom-10 right-[-10%] floating" style="animation-delay: 2s;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-7 text-center lg:text-left">
+            
+            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-[rgba(37,244,238,0.3)] bg-[rgba(37,244,238,0.1)] mb-8 reveal hover-target">
+                <div class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--neon-cyan)] opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-[var(--neon-cyan)]"></span>
+                </div>
+                <span class="text-xs font-bold text-[var(--neon-cyan)] tracking-widest uppercase font-mono">Elite E-Com & Creator Hub</span>
+            </div>
+
+            <h1 class="text-6xl md:text-8xl font-display font-black text-white leading-[0.9] mb-6 reveal delay-100 tracking-tight">
+                CRACK THE <br>ALGORITHM. <br>
+                <span class="text-gradient-viral">SCALE TO €500/DAY.</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed reveal delay-200">
+                Creatorflow is the ultimate collective for dominating TikTok Shop, UGC, and E-Commerce. We provide the strategies, community support, and viral blueprints to turn your views into a massive income stream.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 reveal delay-200">
+                <a href="#pricing" class="w-full sm:w-auto px-10 py-4 btn-viral rounded-xl font-display font-bold text-lg text-center hover-target">
+                    GET PREMIUM ACCESS
+                </a>
+                <a href="#reviews" class="w-full sm:w-auto px-10 py-4 rounded-xl border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(255,255,255,0.05)] text-white font-bold text-lg transition-all text-center flex justify-center items-center gap-3 hover-target">
+                    <i class="fa-solid fa-play text-[var(--neon-pink)]"></i> VIEW RESULTS
+                </a>
+            </div>
+
+            <div class="mt-12 flex items-center justify-center lg:justify-start gap-6 reveal delay-200">
+                <div class="flex -space-x-4">
+                    <img class="w-10 h-10 border-2 border-[var(--bg-dark)] rounded-full" src="https://i.pravatar.cc/100?img=11" alt="Member">
+                    <img class="w-10 h-10 border-2 border-[var(--bg-dark)] rounded-full" src="https://i.pravatar.cc/100?img=12" alt="Member">
+                    <img class="w-10 h-10 border-2 border-[var(--bg-dark)] rounded-full" src="https://i.pravatar.cc/100?img=13" alt="Member">
+                    <div class="w-10 h-10 border-2 border-[var(--bg-dark)] rounded-full bg-[#27272a] flex items-center justify-center text-xs font-bold text-white">4.9★</div>
+                </div>
+                <div class="text-sm">
+                    <div class="flex text-yellow-400 text-xs mb-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <span class="text-gray-400 font-medium">Top Rated on Whop</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="lg:col-span-5 relative hidden lg:block reveal delay-200">
+            
+            <div class="relative z-10 glass-panel p-6 border border-[rgba(37,244,238,0.3)] shadow-[0_0_50px_rgba(37,244,238,0.1)] floating transform rotate-[2deg]">
+                <div class="flex items-center justify-between border-b border-gray-800 pb-4 mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-[var(--neon-pink)] flex items-center justify-center text-white text-xs"><i class="fa-brands fa-tiktok"></i></div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm leading-none">TikTok Shop Hub</h4>
+                            <span class="text-gray-500 text-[10px] font-mono">Live Dashboard</span>
+                        </div>
+                    </div>
+                    <span class="text-xs bg-[rgba(37,244,238,0.2)] text-[var(--neon-cyan)] px-2 py-1 rounded font-bold uppercase">Active</span>
+                </div>
+                
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-gray-400 text-xs mb-1 font-mono uppercase tracking-widest">Today's Revenue</p>
+                        <div class="flex items-end gap-3">
+                            <h2 class="text-white font-display text-4xl font-bold">€ 542.80</h2>
+                            <span class="text-[var(--neon-cyan)] text-sm font-bold mb-1"><i class="fa-solid fa-arrow-trend-up"></i> +24%</span>
+                        </div>
+                        <div class="w-full h-1 bg-gray-800 mt-3 rounded overflow-hidden">
+                            <div class="w-[75%] h-full bg-gradient-to-r from-[var(--neon-cyan)] to-[var(--neon-pink)]"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#09090b] p-4 rounded-xl border border-gray-800">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-white font-bold text-sm">Recent Conversions</span>
+                            <span class="text-[var(--neon-pink)] text-[10px] font-mono animate-pulse">● LIVE</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-gray-400"><i class="fa-solid fa-bag-shopping mr-2 text-gray-600"></i> Viral Hoodie (Black)</span>
+                                <span class="text-white font-bold">€49.99</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-gray-400"><i class="fa-solid fa-bag-shopping mr-2 text-gray-600"></i> Tech Gadget Bundle</span>
+                                <span class="text-white font-bold">€89.00</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-gray-400"><i class="fa-solid fa-bag-shopping mr-2 text-gray-600"></i> UGC Campaign Payout</span>
+                                <span class="text-[var(--neon-cyan)] font-bold">€150.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute -bottom-10 -left-10 glass-panel p-4 border border-[var(--neon-pink)] shadow-[0_0_30px_rgba(254,44,85,0.2)] floating" style="animation-delay: 1.5s;">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-[var(--neon-pink)] flex items-center justify-center text-white text-lg"><i class="fa-solid fa-fire"></i></div>
+                    <div>
+                        <div class="text-white font-bold font-display text-lg">First €500 Day!</div>
+                        <div class="text-gray-400 text-xs">Just achieved by a member</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="border-y border-[rgba(255,255,255,0.05)] bg-[rgba(24,24,27,0.5)] backdrop-blur-lg relative z-20">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 divide-x divide-[rgba(255,255,255,0.05)]">
+            <div class="p-8 text-center reveal">
+                <div class="font-display text-4xl lg:text-5xl text-white font-bold mb-2">24/7</div>
+                <div class="font-mono text-[10px] text-gray-400 uppercase tracking-widest font-semibold">Active Support</div>
+            </div>
+            <div class="p-8 text-center reveal delay-100">
+                <div class="font-display text-4xl lg:text-5xl text-white font-bold mb-2">€500+</div>
+                <div class="font-mono text-[10px] text-gray-400 uppercase tracking-widest font-semibold">Daily Scaling Goals</div>
+            </div>
+            <div class="p-8 text-center reveal delay-200">
+                <div class="font-display text-4xl lg:text-5xl text-[var(--neon-cyan)] font-bold mb-2">100%</div>
+                <div class="font-mono text-[10px] text-gray-400 uppercase tracking-widest font-semibold">Beginner Friendly</div>
+            </div>
+            <div class="p-8 text-center reveal delay-200">
+                <div class="font-display text-4xl lg:text-5xl text-[var(--neon-pink)] font-bold mb-2">20%</div>
+                <div class="font-mono text-[10px] text-gray-400 uppercase tracking-widest font-semibold">Affiliate Commission</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            <div class="relative reveal">
+                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop" alt="Social Media Creation" class="rounded-3xl border border-[rgba(255,255,255,0.1)] shadow-[0_0_50px_rgba(0,0,0,0.8)] opacity-80 filter contrast-125 grayscale-[30%]">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-dark)] to-transparent rounded-3xl"></div>
+                
+                <div class="absolute bottom-10 left-10 glass-panel p-6 border-[var(--neon-cyan)] hidden md:block floating" style="animation-delay: 1s;">
+                    <div class="text-[var(--neon-cyan)] text-xs font-mono mb-2 uppercase tracking-widest">The Old Way vs The Flow</div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 text-gray-400 line-through decoration-red-500 text-sm">
+                            <i class="fa-solid fa-xmark text-red-500"></i> Guessing TikTok Algorithms
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-400 line-through decoration-red-500 text-sm">
+                            <i class="fa-solid fa-xmark text-red-500"></i> Wasting money on bad Ads
+                        </div>
+                        <div class="flex items-center gap-3 text-white font-bold text-sm">
+                            <i class="fa-solid fa-check text-[var(--neon-cyan)]"></i> Proven Organic Blueprints
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal delay-100">
+                <h2 class="text-[var(--neon-pink)] font-mono tracking-widest uppercase text-xs mb-4">Escape The Matrix</h2>
+                <h3 class="text-4xl md:text-5xl font-display font-bold text-white mb-6 leading-tight">
+                    STOP SCROLLING. <br>START <span class="text-gradient-viral">SELLING.</span>
+                </h3>
+                
+                <div class="space-y-6 text-gray-400 leading-relaxed font-light">
+                    <p>
+                        Most people spend 4 hours a day consuming content on TikTok and Instagram, making other people rich. The e-commerce game has shifted. You no longer need massive budgets for Facebook ads to build a brand.
+                    </p>
+                    <p>
+                        <strong class="text-white">Creatorflow is the cheat code.</strong> We teach you how to leverage TikTok Shop, UGC (User Generated Content), and organic viral strategies to build an e-commerce empire from scratch. Whether you are a complete beginner or looking to scale past your first €500 day, this community has the exact blueprints you need.
+                    </p>
+                </div>
+
+                <div class="mt-10 space-y-4">
+                    <div class="flex items-start gap-4 p-4 glass-panel hover:border-[var(--neon-cyan)] transition-colors hover-target">
+                        <div class="mt-1 text-[var(--neon-cyan)] text-xl"><i class="fa-solid fa-mobile-screen"></i></div>
+                        <div>
+                            <h4 class="text-white font-bold font-display tracking-wide">Organic Viral Strategies</h4>
+                            <p class="text-sm text-gray-400 mt-1">Learn the exact hook structures and editing frameworks that trigger the algorithm to push your videos to millions.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 glass-panel hover:border-[var(--neon-pink)] transition-colors hover-target">
+                        <div class="mt-1 text-[var(--neon-pink)] text-xl"><i class="fa-solid fa-shop"></i></div>
+                        <div>
+                            <h4 class="text-white font-bold font-display tracking-wide">TikTok Shop Mastery</h4>
+                            <p class="text-sm text-gray-400 mt-1">Step-by-step guidance on setting up, sourcing products, and collaborating with affiliates to drive automated sales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="features" class="py-24 relative bg-[rgba(24,24,27,0.3)] border-y border-[rgba(255,255,255,0.05)]">
+    
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-[var(--neon-cyan)] font-mono tracking-widest uppercase text-xs mb-4">Inside The Premium Hub</h2>
+            <h3 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">THE <span class="text-gradient-viral">CREATOR ARSENAL</span></h3>
+            <p class="text-gray-400 max-w-2xl mx-auto font-light">Everything you need to go from zero to a full-time income. No fluff. Just actionable scaling tactics and a community that pushes you.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="glass-panel p-8 card-hover reveal hover-target">
+                <div class="w-14 h-14 rounded-2xl bg-[#09090b] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[var(--neon-cyan)] text-2xl mb-6 shadow-[0_0_20px_rgba(37,244,238,0.2)]">
+                    <i class="fa-solid fa-video"></i>
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3 font-display">Viral Content Breakdowns</h4>
+                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                    We reverse-engineer videos that hit 1M+ views. You get the exact scripts, hook timings, and editing styles so you can replicate the success for your own products.
+                </p>
+            </div>
+
+            <div class="glass-panel p-8 card-hover reveal delay-100 hover-target">
+                <div class="w-14 h-14 rounded-2xl bg-[#09090b] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[var(--neon-pink)] text-2xl mb-6 shadow-[0_0_20px_rgba(254,44,85,0.2)]">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3 font-display">E-Com Scaling Tactics</h4>
+                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                    From finding winning products to setting up high-converting landing pages. We show you how to structure your backend so you can handle €500+ days without crashing.
+                </p>
+            </div>
+
+            <div class="glass-panel p-8 card-hover reveal delay-200 hover-target">
+                <div class="w-14 h-14 rounded-2xl bg-[#09090b] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-white text-2xl mb-6 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                    <i class="fa-solid fa-users-rays"></i>
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3 font-display">Elite Community Support</h4>
+                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                    "Die Community ist geisteskrank" (The community is insane). Get 24/7 help from people who started with nothing and are now making a full-time living online. No egos, just growth.
+                </p>
+            </div>
+
+            <div class="glass-panel p-8 card-hover reveal hover-target">
+                <div class="w-14 h-14 rounded-2xl bg-[#09090b] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[var(--neon-cyan)] text-2xl mb-6">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3 font-display">Weekly Live Calls</h4>
+                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                    Hop on live sessions with the founders and top members. Ask your specific questions, get your stores reviewed, and stay updated with the latest algorithm changes.
+                </p>
+            </div>
+
+            <div class="glass-panel p-8 card-hover reveal delay-100 hover-target">
+                <div class="w-14 h-14 rounded-2xl bg-[#09090b] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[var(--neon-pink)] text-2xl mb-6">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3 font-display">UGC Connections</h4>
+                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                    Need content for your brand? Network with content creators inside the hub. Learn how to script UGC ads that don't look like ads, and drive massive conversion rates.
+                </p>
+            </div>
+
+            <div class="glass-panel p-8 card-hover reveal delay-200 relative overflow-hidden hover-target border-[var(--neon-cyan)] shadow-[0_0_20px_rgba(37,244,238,0.1)]">
+                <div class="absolute top-0 right-0 bg-[var(--neon-cyan)] text-black text-[10px] font-bold px-4 py-1.5 rounded-bl-xl uppercase tracking-wider">Earn Back</div>
+                <div class="w-14 h-14 rounded-2xl bg-[#09090b] border border-[var(--neon-cyan)] flex items-center justify-center text-[var(--neon-cyan)] text-2xl mb-6">
+                    <i class="fa-solid fa-coins"></i>
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3 font-display">20% Affiliate Engine</h4>
+                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                    Love Creatorflow? Share your custom Whop link and earn a recurring <strong class="text-white">20% commission</strong> for every member you bring in. Your membership can pay for itself.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section id="blueprint" class="py-24 relative overflow-hidden bg-[#09090b]">
+    <div class="absolute inset-0 z-0 opacity-10" style="background-image: radial-gradient(circle at center, var(--neon-cyan) 0%, transparent 10%); background-size: 100px 100px;"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-[var(--neon-pink)] font-mono tracking-widest uppercase text-xs mb-4">The Matrix Exit Plan</h2>
+            <h3 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">THE €500/DAY <span class="text-gradient-viral">BLUEPRINT</span></h3>
+            <p class="text-gray-400 max-w-2xl mx-auto font-light">We don't leave you guessing. This is the exact 3-step timeline every successful Creatorflow member uses to scale their TikTok Shop and UGC income.</p>
+        </div>
+
+        <div class="relative mt-20">
+            <div class="hidden lg:block absolute top-[40px] left-[10%] w-[80%] h-1 bg-gradient-to-r from-[rgba(37,244,238,0.2)] via-[var(--neon-pink)] to-[rgba(37,244,238,0.2)] z-0"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 relative z-10">
+                
+                <div class="reveal relative hover-target">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-[#18181b] border-4 border-[var(--neon-cyan)] flex items-center justify-center text-2xl text-white font-display font-bold mb-8 shadow-[0_0_30px_rgba(37,244,238,0.3)] z-10 relative">
+                        01
+                    </div>
+                    <div class="glass-panel p-8 text-center card-hover hover:border-[var(--neon-cyan)] transition-colors">
+                        <h4 class="text-xl font-bold text-white mb-4 font-display uppercase tracking-wide">The Incubation</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 font-light">
+                            First, we build your foundation. You'll learn how to set up your TikTok Shop correctly, avoid shadowbans, and source high-converting products that the algorithm loves.
+                        </p>
+                        <div class="inline-block px-3 py-1 bg-[rgba(37,244,238,0.1)] border border-[var(--neon-cyan)] rounded text-[var(--neon-cyan)] text-[10px] uppercase tracking-widest font-mono">
+                            Days 1 - 7
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal delay-100 relative hover-target">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-[#18181b] border-4 border-[var(--neon-pink)] flex items-center justify-center text-2xl text-white font-display font-bold mb-8 shadow-[0_0_30px_rgba(254,44,85,0.3)] z-10 relative">
+                        02
+                    </div>
+                    <div class="glass-panel p-8 text-center card-hover hover:border-[var(--neon-pink)] transition-colors">
+                        <h4 class="text-xl font-bold text-white mb-4 font-display uppercase tracking-wide">Viral Engineering</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 font-light">
+                            We deploy our proven UGC scripts. You will start creating and posting content using our specific hook-structures and retention-hacks designed to hit the FYP instantly.
+                        </p>
+                        <div class="inline-block px-3 py-1 bg-[rgba(254,44,85,0.1)] border border-[var(--neon-pink)] rounded text-[var(--neon-pink)] text-[10px] uppercase tracking-widest font-mono">
+                            Weeks 2 - 4
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal delay-200 relative hover-target">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-[#18181b] border-4 border-white flex items-center justify-center text-2xl text-[var(--neon-cyan)] font-display font-bold mb-8 shadow-[0_0_30px_rgba(255,255,255,0.3)] z-10 relative">
+                        03
+                    </div>
+                    <div class="glass-panel p-8 text-center card-hover hover:border-white transition-colors">
+                        <h4 class="text-xl font-bold text-white mb-4 font-display uppercase tracking-wide">Monetize & Scale</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 font-light">
+                            Once a video hits the algorithm, the sales pour in. We teach you how to handle fulfillment, partner with other creators for affiliates, and consistently hit that €500/day mark.
+                        </p>
+                        <div class="inline-block px-3 py-1 bg-[rgba(255,255,255,0.1)] border border-white rounded text-white text-[10px] uppercase tracking-widest font-mono">
+                            Month 2+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="reviews" class="py-24 relative overflow-hidden bg-[rgba(24,24,27,0.4)] border-y border-[rgba(255,255,255,0.05)]">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+            <div>
+                <h2 class="text-[var(--neon-cyan)] font-mono tracking-widest uppercase text-xs mb-3">Field Reports</h2>
+                <h3 class="text-4xl md:text-5xl font-display font-bold text-white leading-tight">
+                    PROOF IN <br><span class="text-gradient-viral">NUMBERS.</span>
+                </h3>
+            </div>
+            <div class="mt-6 md:mt-0 glass-panel px-6 py-3 border border-yellow-500/30 flex items-center gap-4 rounded-xl shadow-[0_0_20px_rgba(234,179,8,0.1)]">
+                <div class="flex text-yellow-400 text-lg">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <div class="text-white font-bold font-display">4.9 <span class="text-gray-500 text-sm font-sans font-normal">/ Top Rated on Whop</span></div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="glass-panel p-8 card-hover reveal relative overflow-hidden hover-target">
+                <i class="fa-solid fa-quote-right absolute -right-4 -top-4 text-6xl text-[rgba(255,255,255,0.03)]"></i>
+                <div class="flex text-yellow-400 text-xs mb-6"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="text-gray-300 font-light leading-relaxed mb-8 relative z-10 text-sm">"Creatorflow completely changed my perspective on E-Com. I was burning money on FB ads. Using their organic TikTok strategies, I hit my first €1,000 week without spending a cent on advertising. The community is gold."</p>
+                <div class="flex items-center gap-4 border-t border-[rgba(255,255,255,0.05)] pt-6">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--neon-cyan)] to-[var(--neon-pink)] flex items-center justify-center font-bold text-white font-display shadow-lg">ML</div>
+                    <div>
+                        <h5 class="text-white font-bold text-sm">Max L.</h5>
+                        <p class="text-[10px] text-[var(--neon-cyan)] tracking-widest uppercase font-mono">Verified Member</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-8 card-hover reveal delay-100 relative overflow-hidden border-[var(--neon-pink)] shadow-[0_0_30px_rgba(254,44,85,0.15)] transform md:-translate-y-4 hover-target">
+                <div class="absolute top-0 right-0 bg-[var(--neon-pink)] text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl uppercase tracking-wider z-20">Top Result</div>
+                <i class="fa-solid fa-quote-right absolute -right-4 -top-4 text-6xl text-[rgba(254,44,85,0.05)]"></i>
+                <div class="flex text-yellow-400 text-xs mb-6"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="text-gray-300 font-light leading-relaxed mb-8 relative z-10 text-sm">"The weekly live calls are insane. The founders literally review your TikTok Shop setup and tell you exactly what hooks to use. I scaled to €500/day consistently in month 2. Insane ROI for just €29/mo."</p>
+                <div class="flex items-center gap-4 border-t border-[rgba(255,255,255,0.05)] pt-6">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-[var(--neon-pink)] flex items-center justify-center font-bold text-white font-display shadow-lg">JS</div>
+                    <div>
+                        <h5 class="text-white font-bold text-sm">Julia S.</h5>
+                        <p class="text-[10px] text-[var(--neon-pink)] tracking-widest uppercase font-mono">Verified Member</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-8 card-hover reveal delay-200 relative overflow-hidden hover-target">
+                <i class="fa-solid fa-quote-right absolute -right-4 -top-4 text-6xl text-[rgba(255,255,255,0.03)]"></i>
+                <div class="flex text-yellow-400 text-xs mb-6"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="text-gray-300 font-light leading-relaxed mb-8 relative z-10 text-sm">"Best UGC Discord in the German market, hands down. The networking alone is worth the price. I've found reliable affiliates to push my products, and the sales are almost automated now. 10/10."</p>
+                <div class="flex items-center gap-4 border-t border-[rgba(255,255,255,0.05)] pt-6">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--neon-cyan)] to-blue-500 flex items-center justify-center font-bold text-white font-display shadow-lg">TW</div>
+                    <div>
+                        <h5 class="text-white font-bold text-sm">Tom W.</h5>
+                        <p class="text-[10px] text-[var(--neon-cyan)] tracking-widest uppercase font-mono">Verified Member</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="pricing" class="py-32 relative bg-[#09090b] border-y border-[rgba(255,255,255,0.05)] overflow-hidden">
+    <div class="ambient-glow-pink top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50"></div>
+
+    <div class="max-w-5xl mx-auto px-6 lg:px-8 relative z-10">
+        
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-[var(--neon-cyan)] font-mono tracking-widest uppercase text-xs mb-4">Join The Movement</h2>
+            <h3 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">UNLOCK <span class="text-gradient-viral">CREATORFLOW</span></h3>
+            <p class="text-gray-400 max-w-xl mx-auto font-light">Stop watching others succeed on your FYP. Get the blueprint, join the elite network, and start scaling your own E-Com empire today.</p>
+        </div>
+
+        <div class="max-w-md mx-auto">
+            <div class="glass-panel rounded-3xl overflow-hidden border-2 border-[var(--neon-pink)] shadow-[0_0_50px_rgba(254,44,85,0.2)] hover:shadow-[0_0_70px_rgba(254,44,85,0.4)] transition-all duration-500 reveal flex flex-col relative z-20 hover-target">
+                <div class="absolute top-0 right-0 bg-gradient-to-r from-[var(--neon-pink)] to-[var(--neon-cyan)] text-white font-bold text-[10px] px-5 py-2 rounded-bl-xl uppercase tracking-widest font-mono z-10">Full Access</div>
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--neon-pink)] to-[var(--neon-cyan)]"></div>
+                
+                <div class="p-10 border-b border-[rgba(255,255,255,0.05)] bg-[rgba(0,0,0,0.4)] text-center">
+                    <h4 class="font-display text-3xl text-white mb-2 font-bold">Creatorflow Premium</h4>
+                    <p class="text-gray-400 text-sm mb-8">The complete E-Com & UGC ecosystem.</p>
+                    <div class="flex items-end justify-center gap-2">
+                        <span class="text-6xl font-display font-black text-white">€29.00</span>
+                    </div>
+                    <div class="text-[var(--neon-pink)] font-bold mt-2 uppercase tracking-widest text-xs font-mono">/ Month</div>
+                </div>
+                
+                <div class="p-10 flex-1 flex flex-col">
+                    <ul class="space-y-5 mb-10 flex-1">
+                        <li class="flex items-start gap-4 text-white text-sm"><i class="fa-solid fa-check text-[var(--neon-cyan)] mt-1 text-lg"></i> <span class="leading-relaxed">Full access to TikTok Shop & E-Com Blueprints</span></li>
+                        <li class="flex items-start gap-4 text-white text-sm"><i class="fa-solid fa-check text-[var(--neon-cyan)] mt-1 text-lg"></i> <span class="leading-relaxed">Viral Hooks, Scripts, and Editing Frameworks</span></li>
+                        <li class="flex items-start gap-4 text-white text-sm"><i class="fa-solid fa-check text-[var(--neon-cyan)] mt-1 text-lg"></i> <span class="leading-relaxed">Weekly Live Calls & Store Reviews</span></li>
+                        <li class="flex items-start gap-4 text-white text-sm"><i class="fa-solid fa-check text-[var(--neon-cyan)] mt-1 text-lg"></i> <span class="leading-relaxed">Private Networking & Affiliate Connections</span></li>
+                        <li class="flex items-start gap-4 text-[var(--neon-pink)] font-bold text-sm"><i class="fa-solid fa-bolt text-[var(--neon-pink)] mt-1 text-lg"></i> <span class="leading-relaxed">20% Recurring Affiliate Commission</span></li>
+                    </ul>
+                    <a href="https://whop.com/creatorflow-premium/creatorflow-premium?a=digitalartlab" target="_blank" class="w-full py-5 rounded-xl btn-viral font-display font-bold tracking-widest text-center transition-all text-lg shadow-[0_0_20px_rgba(254,44,85,0.4)] hover:scale-105">
+                        START SCALING NOW
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-16 text-center reveal delay-100 border-t border-[rgba(255,255,255,0.05)] pt-10">
+            <h4 class="text-white font-display font-bold text-xl mb-4">Immediate Delivery</h4>
+            <p class="text-gray-400 text-sm max-w-xl mx-auto mb-8 font-light leading-relaxed">
+                As soon as you complete your checkout securely via Whop, you will instantly receive an invite to the private Discord server. All guides, blueprints, and community channels are unlocked immediately.
+            </p>
+            <a href="https://whop.com/creatorflow-premium?a=digitalartlab" target="_blank" class="text-[var(--neon-cyan)] hover:text-white font-bold text-sm underline underline-offset-4 transition-colors hover-target">Visit the main Creatorflow Hub &rarr;</a>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 relative overflow-hidden bg-[#18181b]">
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-3xl md:text-4xl font-display font-bold text-white uppercase mb-4">Frequently Asked <span class="text-gradient-viral">Questions</span></h2>
+            <div class="w-16 h-1 bg-[var(--neon-cyan)] mx-auto rounded"></div>
+        </div>
+
+        <div class="space-y-4">
+            
+            <div class="glass-panel border border-gray-800 rounded-xl overflow-hidden reveal hover-target faq-container">
+                <button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none faq-btn transition-colors hover:bg-[rgba(255,255,255,0.02)]">
+                    <span class="font-bold text-white tracking-wide font-display text-lg">Do I need a large following to start?</span>
+                    <i class="fa-solid fa-plus accordion-icon text-[var(--neon-pink)] transition-transform duration-300 text-xl"></i>
+                </button>
+                <div class="accordion-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                    <div class="px-8 pb-6 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4 font-light">
+                        Absolutely not. TikTok Shop and modern algorithm-driven platforms do not care about your follower count. They care about retention and watch time. We teach you how to engineer viral videos from a brand new account with zero followers, driving massive traffic instantly.
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel border border-gray-800 rounded-xl overflow-hidden reveal delay-100 hover-target faq-container">
+                <button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none faq-btn transition-colors hover:bg-[rgba(255,255,255,0.02)]">
+                    <span class="font-bold text-white tracking-wide font-display text-lg">Is this only for the German market?</span>
+                    <i class="fa-solid fa-plus accordion-icon text-[var(--neon-pink)] transition-transform duration-300 text-xl"></i>
+                </button>
+                <div class="accordion-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                    <div class="px-8 pb-6 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4 font-light">
+                        While we have a massive German-speaking community, the strategies, hook structures, and psychological triggers we teach are universal. Whether you are selling in Europe, the US, or globally, the TikTok algorithm works the exact same way.
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel border border-gray-800 rounded-xl overflow-hidden reveal delay-200 hover-target faq-container">
+                <button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none faq-btn transition-colors hover:bg-[rgba(255,255,255,0.02)]">
+                    <span class="font-bold text-white tracking-wide font-display text-lg">What if I don't want to show my face?</span>
+                    <i class="fa-solid fa-plus accordion-icon text-[var(--neon-pink)] transition-transform duration-300 text-xl"></i>
+                </button>
+                <div class="accordion-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                    <div class="px-8 pb-6 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4 font-light">
+                        No problem. We have dedicated channels for Faceless Marketing and connecting with UGC creators. You can pay micro-influencers to create the content for your products, and you just handle the uploading and scaling on the backend.
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel border border-gray-800 rounded-xl overflow-hidden reveal hover-target faq-container">
+                <button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none faq-btn transition-colors hover:bg-[rgba(255,255,255,0.02)]">
+                    <span class="font-bold text-white tracking-wide font-display text-lg">How does the 20% Affiliate Engine work?</span>
+                    <i class="fa-solid fa-plus accordion-icon text-[var(--neon-pink)] transition-transform duration-300 text-xl"></i>
+                </button>
+                <div class="accordion-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                    <div class="px-8 pb-6 text-gray-400 text-sm leading-relaxed border-t border-gray-800 pt-4 font-light">
+                        Upon joining through Whop, you get a custom affiliate link. Share it with your network, and for every person who signs up using your link, you earn a 20% recurring commission every single month. It’s an easy way to build an extra passive income stream while learning.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="bg-[#09090b] pt-24 pb-12 border-t border-[rgba(255,255,255,0.05)] relative overflow-hidden">
+    <i class="fa-solid fa-bolt absolute -top-10 -right-20 text-[rgba(255,255,255,0.02)] text-[400px] z-0 pointer-events-none transform -rotate-12"></i>
+
+    <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[var(--neon-pink)] to-transparent opacity-30"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-20">
+            
+            <div class="lg:col-span-5">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-12 h-12 rounded-xl bg-[#09090b] border border-[rgba(255,255,255,0.1)] flex items-center justify-center shadow-[0_0_15px_rgba(37,244,238,0.2)]">
+                        <i class="fa-solid fa-bolt text-white text-xl"></i>
+                    </div>
+                    <span class="font-display font-black text-white text-3xl tracking-wide">CREATORFLOW</span>
+                </div>
+                <p class="text-gray-400 font-light text-sm max-w-sm mb-8 leading-loose">
+                    The ultimate collective for modern E-Commerce. Crack the TikTok algorithm, leverage UGC, and scale your brand to €500/day and beyond. Stop watching, start building.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-gray-400 hover:text-white hover:border-[var(--neon-cyan)] hover:shadow-[0_0_20px_rgba(37,244,238,0.4)] transition-all duration-300 text-xl hover-target"><i class="fa-brands fa-discord"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-gray-400 hover:text-white hover:border-[var(--neon-pink)] hover:shadow-[0_0_20px_rgba(254,44,85,0.4)] transition-all duration-300 text-xl hover-target"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-gray-400 hover:text-white hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-300 text-xl hover-target"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-3 lg:col-start-7">
+                <h4 class="font-mono text-white text-sm tracking-widest uppercase mb-8 border-b border-[rgba(255,255,255,0.1)] pb-3">Platform</h4>
+                <ul class="space-y-4 text-sm text-gray-400 font-light">
+                    <li><a href="#about" class="hover:text-[var(--neon-cyan)] transition-colors flex items-center gap-2 hover-target"><i class="fa-solid fa-angle-right text-[10px] text-[var(--neon-pink)]"></i> The Method</a></li>
+                    <li><a href="#features" class="hover:text-[var(--neon-cyan)] transition-colors flex items-center gap-2 hover-target"><i class="fa-solid fa-angle-right text-[10px] text-[var(--neon-pink)]"></i> The Arsenal</a></li>
+                    <li><a href="#blueprint" class="hover:text-[var(--neon-cyan)] transition-colors flex items-center gap-2 hover-target"><i class="fa-solid fa-angle-right text-[10px] text-[var(--neon-pink)]"></i> Scaling Blueprint</a></li>
+                    <li><a href="#pricing" class="hover:text-[var(--neon-cyan)] transition-colors flex items-center gap-2 hover-target"><i class="fa-solid fa-angle-right text-[10px] text-[var(--neon-pink)]"></i> Premium Access</a></li>
+                    <li><a href="https://whop.com/creatorflow-premium?a=digitalartlab" class="hover:text-[var(--neon-cyan)] transition-colors flex items-center gap-2 hover-target"><i class="fa-solid fa-angle-right text-[10px] text-[var(--neon-pink)]"></i> Member Login</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-3">
+                <h4 class="font-mono text-white text-sm tracking-widest uppercase mb-8 border-b border-[rgba(255,255,255,0.1)] pb-3">Legal</h4>
+                <ul class="space-y-4 text-sm text-gray-400 font-light">
+                    <li><a href="#" class="hover:text-white transition-colors flex items-center gap-2 hover-target">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors flex items-center gap-2 hover-target">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors flex items-center gap-2 hover-target">Refund Policy</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors flex items-center gap-2 hover-target">Earnings Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-[rgba(255,255,255,0.05)] pt-10 flex flex-col lg:flex-row justify-between items-center gap-8 text-center lg:text-left">
+            <p class="font-mono text-[11px] text-gray-500 tracking-[0.2em] uppercase">
+                &copy; 2026 CREATORFLOW. ALL RIGHTS RESERVED.
+            </p>
+            <p class="text-[10px] text-gray-600 max-w-3xl leading-relaxed font-light">
+                Results discussed on this site are not typical. Building a successful E-Commerce brand requires hard work, dedication, and consistent execution of strategies. We do not guarantee any specific financial outcome. Creatorflow provides educational content and a community network to assist you in your entrepreneurial journey.
+            </p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- 1. Custom Cursor Logic (Ring & Dot) ---
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+        const hoverTargets = document.querySelectorAll('.hover-target, a, button');
+
+        if (window.matchMedia("(min-width: 1024px)").matches) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                // Dot follows instantly
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+
+                // Ring follows with slight delay for smooth effect
+                cursorRing.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 400, fill: "forwards" });
+            });
+
+            // Add hover effects
+            hoverTargets.forEach(target => {
+                target.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                target.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+            });
+        }
+
+        // --- 2. Mobile Menu Toggle Logic ---
+        const hb = document.getElementById('menu-btn');
+        const mm = document.getElementById('mobile-menu');
+        const ml = mm.querySelectorAll('a');
+
+        function tog(fc = false) {
+            const o = mm.classList.contains('hidden');
+            if (fc || !o) {
+                mm.classList.add('hidden');
+                mm.classList.remove('flex');
+            } else {
+                mm.classList.remove('hidden');
+                mm.classList.add('flex');
+            }
+        }
+
+        hb.addEventListener('click', () => tog());
+        ml.forEach(l => l.addEventListener('click', () => tog(true)));
+
+        // --- 3. Navbar Scroll Glassmorphism Effect ---
+        const nav = document.getElementById('navbar');
+        const innerNav = nav.querySelector('.glass-panel');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                nav.classList.add('bg-[rgba(9,9,11,0.95)]', 'backdrop-blur-xl', 'border-b', 'border-[rgba(255,255,255,0.05)]', 'shadow-2xl');
+                nav.style.top = '0';
+                if(innerNav) {
+                    innerNav.classList.remove('glass-panel', 'border', 'px-6', 'py-3', 'rounded-2xl');
+                    innerNav.classList.add('bg-transparent', 'border-transparent', 'py-2');
+                }
+            } else {
+                nav.classList.remove('bg-[rgba(9,9,11,0.95)]', 'backdrop-blur-xl', 'border-b', 'border-[rgba(255,255,255,0.05)]', 'shadow-2xl');
+                nav.style.top = '40px';
+                if(innerNav) {
+                    innerNav.classList.add('glass-panel', 'border', 'px-6', 'py-3', 'rounded-2xl');
+                    innerNav.classList.remove('bg-transparent', 'border-transparent', 'py-2');
+                }
+            }
+        });
+
+        // --- 4. Intersection Observer for Scroll Reveals ---
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Run animation only once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        setTimeout(() => {
+            document.querySelectorAll('.reveal:not(.active)').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) el.classList.add('active');
+            });
+        }, 500);
+
+        // --- 5. Advanced FAQ Accordion Logic ---
+        const faqButtons = document.querySelectorAll('.faq-btn');
+        
+        faqButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('.accordion-icon');
+                const container = this.closest('.faq-container');
+                const isOpen = content.classList.contains('opacity-100');
+
+                // Close all others
+                document.querySelectorAll('.accordion-content').forEach(c => {
+                    c.style.maxHeight = null;
+                    c.classList.remove('opacity-100');
+                    c.classList.add('opacity-0');
+                });
+                document.querySelectorAll('.accordion-icon').forEach(i => {
+                    i.classList.remove('rotate-45', 'text-[var(--neon-cyan)]');
+                    i.classList.add('text-[var(--neon-pink)]');
+                });
+                document.querySelectorAll('.faq-container').forEach(c => {
+                    c.classList.remove('border-[var(--neon-cyan)]');
+                });
+
+                // Toggle current
+                if (!isOpen) {
+                    container.classList.add('border-[var(--neon-cyan)]'); // Highlight border
+                    content.classList.remove('opacity-0');
+                    content.classList.add('opacity-100');
+                    content.style.maxHeight = content.scrollHeight + "px"; // Dynamic height
+                    icon.classList.add('rotate-45', 'text-[var(--neon-cyan)]'); // Turn plus into X and turn cyan
+                    icon.classList.remove('text-[var(--neon-pink)]');
+                }
+            });
+        });
+
+    });
+</script>
+
+</body>
+</html>
